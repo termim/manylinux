@@ -14,7 +14,7 @@ for PREFIX in $(find /opt/_internal/ -mindepth 1 -maxdepth 1 \( -name 'cpython*'
 	# Some python's install as bin/python3. Make them available as
 	# bin/python.
 	if [ -e ${PREFIX}/bin/python3 ] && [ ! -e ${PREFIX}/bin/python ]; then
-		ln -s python3 ${PREFIX}/bin/python
+		ln -s ${PREFIX}/bin/python3 ${PREFIX}/bin/python
 	fi
 	${PREFIX}/bin/python -m ensurepip
 	if [ -e ${PREFIX}/bin/pip3 ] && [ ! -e ${PREFIX}/bin/pip ]; then

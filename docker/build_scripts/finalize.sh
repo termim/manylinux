@@ -19,6 +19,7 @@ for PREFIX in $(find /opt/_internal/ -mindepth 1 -maxdepth 1 \( -name 'cpython*'
     ldd ${PREFIX}/bin/python
     ls -la ${PREFIX}/
     ls -la ${PREFIX}/lib
+    LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${PREFIX}/lib
 	${PREFIX}/bin/python -m ensurepip
 	if [ -e ${PREFIX}/bin/pip3 ] && [ ! -e ${PREFIX}/bin/pip ]; then
 		ln -s pip3 ${PREFIX}/bin/pip

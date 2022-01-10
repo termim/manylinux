@@ -16,10 +16,12 @@ for PREFIX in $(find /opt/_internal/ -mindepth 1 -maxdepth 1 \( -name 'cpython*'
 	if [ -e ${PREFIX}/bin/python3 ] && [ ! -e ${PREFIX}/bin/python ]; then
 		ln -s ${PREFIX}/bin/python3 ${PREFIX}/bin/python
 	fi
+    echo "AAAAAAAAAAAAA"
     ldd ${PREFIX}/bin/python
     ls -la ${PREFIX}/
     ls -la ${PREFIX}/lib
-    LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${PREFIX}/lib
+    LD_LIBRARY_PATH_SAVE=$LD_LIBRARY_PATH
+    LD_LIBRARY_PATH=$LD_LIBRARY_PATH_SAVE:${PREFIX}/lib
 	${PREFIX}/bin/python -m ensurepip
 	if [ -e ${PREFIX}/bin/pip3 ] && [ ! -e ${PREFIX}/bin/pip ]; then
 		ln -s pip3 ${PREFIX}/bin/pip
@@ -92,4 +94,4 @@ rm -rf /root/.cache
 hardlink -cv /opt/_internal
 
 # update system packages
-LC_ALL=C ${MY_DIR}/update-system-packages.sh
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH_SAVE LC_ALL=C ${MY_DIR}/update-system-packages.sh

@@ -67,6 +67,12 @@ jobs:
       - name: Build
         run: ./build.sh
 
+      - name: Archive image
+        uses: actions/upload-artifact@v2
+        with:
+          name: manylinux-${{ matrix.policy }}-${{ matrix.platform }}-${{ github.sha }}
+          path: manylinux_${ matrix.policy }_${ matrix.platform }_${ github.sha }.tar
+
       - name: Deploy
         if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'pypa/manylinux'
         run: ./deploy.sh

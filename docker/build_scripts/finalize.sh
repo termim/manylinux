@@ -97,4 +97,6 @@ hardlink -cv /opt/_internal
 echo "BBBBBBBBBBB"
 echo $PATH
 echo "BBBBBBBBBBB"
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH_SAVE LC_ALL=C ${MY_DIR}/update-system-packages.sh
+if [ "${AUDITWHEEL_POLICY}" != "manylinux2014" ]; then
+    LD_LIBRARY_PATH=$LD_LIBRARY_PATH_SAVE LC_ALL=C ${MY_DIR}/update-system-packages.sh
+fi

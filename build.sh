@@ -112,6 +112,7 @@ else
 	echo "Unsupported build frontend: '${MANYLINUX_BUILD_FRONTEND}'"
 	exit 1
 fi
+docker container ls
 bzip2 -9 manylinux_${POLICY}_${PLATFORM}_${COMMIT_SHA}.tar
 echo "AAAAAA"
 ls -la

@@ -94,4 +94,7 @@ rm -rf /root/.cache
 hardlink -cv /opt/_internal
 
 # update system packages
+echo "BBBBBBBBBBB"
+echo $PATH
+echo "BBBBBBBBBBB"
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH_SAVE LC_ALL=C ${MY_DIR}/update-system-packages.sh

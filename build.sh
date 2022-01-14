@@ -112,6 +112,7 @@ else
 	echo "Unsupported build frontend: '${MANYLINUX_BUILD_FRONTEND}'"
 	exit 1
 fi
+bzip2 -9 manylinux_${POLICY}_${PLATFORM}_${COMMIT_SHA}.tar
 echo "AAAAAA"
 ls -la
 #docker run --rm -v $(pwd)/tests:/tests:ro quay.io/pypa/${POLICY}_${PLATFORM}:${COMMIT_SHA} /tests/run_tests.sh

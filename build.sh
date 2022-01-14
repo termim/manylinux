@@ -92,7 +92,7 @@ if [ "${MANYLINUX_BUILD_FRONTEND}" == "docker" ]; then
 	docker build ${BUILD_ARGS_COMMON}
 elif [ "${MANYLINUX_BUILD_FRONTEND}" == "docker-buildx" ]; then
 	docker buildx build \
-		--load \
+		--output=type=tar,dest=AAA.tar \
 		--cache-from=type=local,src=$(pwd)/.buildx-cache-${POLICY}_${PLATFORM} \
 		--cache-to=type=local,dest=$(pwd)/.buildx-cache-staging-${POLICY}_${PLATFORM} \
 		${BUILD_ARGS_COMMON}

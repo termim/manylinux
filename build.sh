@@ -91,8 +91,9 @@ fi
 if [ "${MANYLINUX_BUILD_FRONTEND}" == "docker" ]; then
 	docker build ${BUILD_ARGS_COMMON}
 elif [ "${MANYLINUX_BUILD_FRONTEND}" == "docker-buildx" ]; then
+		#--output=type=tar,dest=manylinux_${POLICY}_${PLATFORM}_${COMMIT_SHA}.tar
 	docker buildx build \
-		--output=type=tar,dest=manylinux_${POLICY}_${PLATFORM}_${COMMIT_SHA}.tar \
+		--load \
 		--cache-from=type=local,src=$(pwd)/.buildx-cache-${POLICY}_${PLATFORM} \
 		--cache-to=type=local,dest=$(pwd)/.buildx-cache-staging-${POLICY}_${PLATFORM} \
 		${BUILD_ARGS_COMMON}
@@ -112,7 +113,8 @@ else
 	echo "Unsupported build frontend: '${MANYLINUX_BUILD_FRONTEND}'"
 	exit 1
 fi
-docker container ls
+docker image ls
+docker save quay.io/pypa/${POLICY}_${PLATFORM}:${COMMIT_SHA} > manylinux_${POLICY}_${PLATFORM}_${COMMIT_SHA}.tar
 bzip2 -9 manylinux_${POLICY}_${PLATFORM}_${COMMIT_SHA}.tar
 echo "AAAAAA"
 ls -la
